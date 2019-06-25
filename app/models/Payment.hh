@@ -52,9 +52,13 @@ class Payment extends Billable
     return TransactionStatus::Pending;
   }
 
-
   public function addTransaction(Transaction $transaction): void
   {
     $this->transactions[] = $transaction;
+  }
+
+  public function getTransactions(): vec<Transaction>
+  {
+    return $this->transactions;
   }
 }

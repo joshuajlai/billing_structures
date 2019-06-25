@@ -15,8 +15,17 @@ class Ledger
 
   public function __construct(int $value, int $referenceId, LedgerType $type)
   {
-    $this->value = $value;
     $this->referenceId = $referenceId;
     $this->type = $type;
+    $this->value = $this->processValue($value, $type);
+  }
+
+  private function processValue(int $value, LedgerType $type): int
+  {
+    if ($type == LedgerType::Payment) {
+      $value = $value * -1;
+    }
+
+    return $value;
   }
 }

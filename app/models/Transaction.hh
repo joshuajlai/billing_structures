@@ -14,6 +14,7 @@ enum TransactionStatus: string {
  */
 class Transaction
 {
+  private int $id;
   private PaymentSource $paymentSource;
   private int $amount;
   private TransactionStatus $status;
@@ -25,6 +26,17 @@ class Transaction
     $this->transactionLogs = vec[];
     $this->status = TransactionStatus::Pending;
     $this->amount = $amount;
+    $this->id = \rand(0, 1000000);
+  }
+
+  public function getAmount(): int
+  {
+    return $this->amount;
+  }
+
+  public function getId(): int
+  {
+    return $this->id;
   }
 
   public function addLog(TransactionLog $transactionLog): void
@@ -35,5 +47,10 @@ class Transaction
   public function getStatus(): TransactionStatus
   {
     return $this->status;
+  }
+
+  public function isCompleted(): bool
+  {
+    return $this->status == TransactionStatus::Completed;
   }
 }
