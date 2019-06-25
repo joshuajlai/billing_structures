@@ -2,10 +2,9 @@
 
 namespace App\Calculators\Billable;
 
-use App\Models\{
-  Billable, Invoice, UnsavedInvoice, LineItem, AdjustmentType, LineItemAdjustment
-};
+use App\Models\{Billable, Plan, LineItem};
 use App\Calculators\{Base, Calculator, TaxEstimator};
+use App\Controllers\Invoice\ConvertFromPlan;
 
 class Estimation implements Calculator
 {
@@ -15,8 +14,7 @@ class Estimation implements Calculator
 
   public function __construct(Billable $billable)
   {
-    $this->billable = $billable;
-    $this->processBillable();
+    $this->billable = $this->processBillable($billable);
   }
 
   public function tax(): int
@@ -35,25 +33,13 @@ class Estimation implements Calculator
     return $this->billable;
   }
 
-  private function processBillable(): void
+  private function processBillable(Billable $billable): Billable
   {
-    if ($this->billable is Invoice) {
-      return;
+    if ($billable is Plan) {
+      $convertController = new ConvertFromPlan();
+      return $convertController->call($billable, false);
     }
 
-    // turn billable into an invoice
-    $unsavedInvoice = new UnsavedInvoice();
-    foreach ($this->billable->getLineItems() as $lineItem) {
-      $newLineItem = new LineItem($lineItem->getName());
-      foreach ($lineItem->getLineItemAdjustments() as $adjustment) {
-        $newAdjustment = new LineItemAdjustment(
-          $adjustment->getValue(), $adjustment->getType()
-        );
-        $newLineItem->addLineItemAdjustment($newAdjustment);
-      }
-      $unsavedInvoice->addLineItem($newLineItem);
-    }
-
-    $this->billable = $unsavedInvoice;
+    return $billable;
   }
 }

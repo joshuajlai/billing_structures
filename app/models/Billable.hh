@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use HH\Lib\Vec;
+
 abstract class Billable
 {
   private vec<LineItem> $lineItems = vec[];
@@ -14,5 +16,14 @@ abstract class Billable
   public function addLineItem(LineItem $lineItem): void
   {
     $this->lineItems[] = $lineItem;
+  }
+
+  public function removeLineItem(LineItem $lineItem): void
+  {
+    $this->lineItems = Vec\diff_by(
+      $this->lineItems,
+      vec[$lineItem],
+      $existingLineItem ==> $existingLineItem->getId() == $lineItem->getId()
+    );
   }
 }

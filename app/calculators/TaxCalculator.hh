@@ -18,7 +18,10 @@ class TaxCalculator
   public function totalTax(): int
   {
     $taxService = new TaxService();
-    $invoice = $taxService->calculateTax($this->invoice);
+    $invoice = $this->invoice;
+    if (! $invoice->isFinalized()) {
+      $invoice = $taxService->calculateTax($invoice);
+    }
     $total = 0;
     $lineItemCalculator = new ItemCalculator();
     foreach ($invoice->getLineItems() as $lineItem) {

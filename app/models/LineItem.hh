@@ -6,6 +6,7 @@ use HH\Lib\Vec;
 
 class LineItem
 {
+  private int $id;
   private vec<LineItemAdjustment> $lineItemAdjustments;
   private string $name;
 
@@ -13,6 +14,12 @@ class LineItem
   {
     $this->lineItemAdjustments = vec[];
     $this->name = $name;
+    $this->id = \rand(0, 100000000);
+  }
+
+  public function getId(): int
+  {
+    return $this->id;
   }
 
   public function getName(): string
