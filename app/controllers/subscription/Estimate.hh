@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace App\Controllers\Plan;
+namespace App\Controllers\Subscription;
 
-use App\Models\Plan;
+use App\Models\Subscription;
 use App\Calculators\Billable\Estimation as EstimationCalculator;
 
 type BillableTotals = shape(
@@ -13,9 +13,9 @@ type BillableTotals = shape(
 
 class Estimation
 {
-  public function call(Plan $plan): BillableTotals
+  public function call(Subscription $subscription): BillableTotals
   {
-    $estimationCalculator = new EstimationCalculator($plan);
+    $estimationCalculator = new EstimationCalculator($subscription);
 
     return shape(
       'total' => $estimationCalculator->total(),

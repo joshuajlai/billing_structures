@@ -33,24 +33,24 @@ class EstimationTest extends HackTest
     expect($calculator->tax())->toBePHPEqual(0);
   }
 
-  public function testTotal_Plan(): void
+  public function testTotal_Subscription(): void
   {
-    $plan = $this->generatePlan();
-    $calculator = new Estimation($plan);
+    $subscription = $this->generateSubscription();
+    $calculator = new Estimation($subscription);
     expect($calculator->total())->toBePHPEqual(300);
   }
 
-  public function testSubtotal_Plan(): void
+  public function testSubtotal_Subscription(): void
   {
-    $plan = $this->generatePlan();
-    $calculator = new Estimation($plan);
+    $subscription = $this->generateSubscription();
+    $calculator = new Estimation($subscription);
     expect($calculator->subtotal())->toBePHPEqual(300);
   }
 
-  public function testTax_Plan(): void
+  public function testTax_Subscription(): void
   {
-    $plan = $this->generatePlan();
-    $calculator = new Estimation($plan);
+    $subscription = $this->generateSubscription();
+    $calculator = new Estimation($subscription);
     expect($calculator->tax())->toBePHPEqual(0);
   }
 }

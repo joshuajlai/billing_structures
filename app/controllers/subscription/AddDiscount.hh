@@ -1,21 +1,21 @@
 <?hh // strict
 
-namespace App\Controllers\Plan;
+namespace App\Controllers\Subscription;
 
-use App\Models\{LineItem, LineItemAdjustment, Plan, AdjustmentType};
+use App\Models\{LineItem, LineItemAdjustment, Subscription, AdjustmentType};
 
 /**
  * Add a top level discount such as flat amount incentive. Does not support percentage.
  */
 class AddDiscount
 {
-  public function call(Plan $plan, string $name, int $value): Plan
+  public function call(Subscription $subscription, string $name, int $value): Subscription
   {
     $lineItem = new LineItem($name);
     $lineItemAdjustment = new LineItemAdjustment($value, AdjustmentType::Discount);
     $lineItem->addLineItemAdjustment($lineItemAdjustment);
-    $plan->addLineItem($lineItem);
+    $subscription->addLineItem($lineItem);
 
-    return $plan;
+    return $subscription;
   }
 }

@@ -1,7 +1,7 @@
 <?hh // strict
 
 use App\Models\{
-  Invoice, LineItem, LineItemAdjustment, AdjustmentType, Plan
+  Invoice, LineItem, LineItemAdjustment, AdjustmentType, Subscription
 };
 
 trait TestLoader
@@ -28,9 +28,9 @@ trait TestLoader
   /**
    * Generate a test invoice
    */
-  public function generatePlan(): Plan
+  public function generateSubscription(): Subscription
   {
-    $invoice = new Plan();
+    $invoice = new Subscription();
 
     for($i = 0; $i < 3; $i++) {
       $lineItem = new LineItem("Item {$i}");

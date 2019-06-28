@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Invoice;
 
-use App\Models\{Plan, Invoice, UnsavedInvoice, LineItem, LineItemAdjustment};
+use App\Models\{Subscription, Invoice, UnsavedInvoice, LineItem, LineItemAdjustment};
 
-class ConvertFromPlan
+class ConvertFromSubscription
 {
-  public function call(Plan $plan, bool $save): Invoice
+  public function call(Subscription $subscription, bool $save): Invoice
   {
     if ($save == true) {
       $invoice = new Invoice();
@@ -14,7 +14,7 @@ class ConvertFromPlan
       $invoice = new UnsavedInvoice();
     }
 
-    foreach ($plan->getLineItems() as $lineItem) {
+    foreach ($subscription->getLineItems() as $lineItem) {
       $newLineItem = new LineItem($lineItem->getName());
       foreach ($lineItem->getLineItemAdjustments() as $adjustment) {
         $newAdjustment = new LineItemAdjustment(

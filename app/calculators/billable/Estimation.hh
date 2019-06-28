@@ -2,9 +2,9 @@
 
 namespace App\Calculators\Billable;
 
-use App\Models\{Billable, Plan, LineItem};
+use App\Models\{Billable, Subscription, LineItem};
 use App\Calculators\{Base, Calculator, TaxEstimator};
-use App\Controllers\Invoice\ConvertFromPlan;
+use App\Controllers\Invoice\ConvertFromSubscription;
 
 class Estimation implements Calculator
 {
@@ -35,8 +35,8 @@ class Estimation implements Calculator
 
   private function processBillable(Billable $billable): Billable
   {
-    if ($billable is Plan) {
-      $convertController = new ConvertFromPlan();
+    if ($billable is Subscription) {
+      $convertController = new ConvertFromSubscription();
       return $convertController->call($billable, false);
     }
 
