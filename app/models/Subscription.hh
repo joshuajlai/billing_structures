@@ -11,6 +11,7 @@ enum SubscriptionStatus: string {
 class Subscription extends Billable
 {
   private SubscriptionStatus $status;
+  private ?ExternalReference $externalReference;
 
   public function __construct()
   {
@@ -25,5 +26,10 @@ class Subscription extends Billable
   public function deactivate(): void
   {
     $this->status = SubscriptionStatus::Inactive;
+  }
+
+  public function setExternalReference(ExternalReference $reference): void
+  {
+    $this->externalReference = $reference;
   }
 }
