@@ -11,7 +11,7 @@ type BillableTotals = shape(
   'tax' => int
 );
 
-class Estimation
+class Estimate
 {
   public function call(Subscription $subscription): BillableTotals
   {

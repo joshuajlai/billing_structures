@@ -10,6 +10,10 @@ class Bill
 {
   public function call(Subscription $subscription): Invoice
   {
+    if (! $subscription->isActive()) {
+      throw new \Exception();
+    }
+
     $converter = new ConvertFromSubscription();
     $invoice = $converter->call($subscription, true);
 

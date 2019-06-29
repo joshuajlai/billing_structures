@@ -32,4 +32,9 @@ class Subscription extends Billable
   {
     $this->externalReference = $reference;
   }
+
+  public function isActive(): bool
+  {
+    return $this->status == SubscriptionStatus::Active;
+  }
 }
