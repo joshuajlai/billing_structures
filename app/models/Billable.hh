@@ -23,7 +23,7 @@ abstract class Billable
     $this->lineItems = Vec\diff_by(
       $this->lineItems,
       vec[$lineItem],
-      $existingLineItem ==> $existingLineItem->getId() == $lineItem->getId()
+      $existingLineItem ==> $existingLineItem->getId()
     );
   }
 }
