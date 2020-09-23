@@ -5,11 +5,11 @@
     }
   },
   "require": {
-    "hhvm/hhvm-autoload": "1.*",
-    "hhvm/hsl": "3.*"
+    "hhvm/hhvm-autoload": "3.*",
+    "hhvm/hsl": "4.*"
   },
   "require-dev": {
-    "hhvm/hacktest": "1.3",
+    "hhvm/hacktest": "*",
     "facebook/fbexpect": "*"
   }
 }
